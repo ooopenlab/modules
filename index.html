@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海賊王靈魂人物大鑑定</title>
+<style>
+body, html {
+height: 100/100;
+margin: 0;
+font-family: "Microsoft JhengHei", sans-serif;
+background-color: #000;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+#main-container {
+width: 95/100;
+max-width: 600px;
+height: 90vh;
+position: relative;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+border-radius: 15px;
+overflow: hidden;
+box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.bg-cover {
+background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://lh3.googleusercontent.com/d/1sj1qgOiX1YZOT6O0tY0vV2UGcQ9ByCW-');
+}
+
+.bg-quiz {
+background-color: #f0f8ff;
+background-image: none !important;
+}
+
+.bg-result {
+background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://lh3.googleusercontent.com/d/11e7UC0A4T3C8ZpI_MP2S9K1vA2DMURRy') !important;
+}
+
+#cover-section {
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+align-items: center;
+width: 100/100;
+height: 100/100;
+text-align: center;
+}
+
+.content-box {
+display: none;
+background-color: rgba(255, 255, 255, 0.5);
+padding: 30px;
+border-radius: 15px;
+width: 85/100;
+text-align: center;
+box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+box-sizing: border-box;
+}
+
+/* 針對最後一頁結果區塊的優化設定 /
+#result-section {
+background-color: rgba(0, 0, 0, 0.5) !important; / 加入半透明黑底 /
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.5) !important;
+border: 1px solid rgba(255, 255, 255, 0.2) !important; / 加上淡淡的邊框 /
+color: #fff;
+padding: 25px;
+backdrop-filter: blur(5px); / 加入磨砂玻璃效果，增加層次感 */
+}
+
+#result-section p, #result-section div {
+text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+}
+
+h1 {
+color: #fff;
+text-shadow: 2px 2px 10px rgba(0,0,0,1);
+font-size: 2.2em;
+margin: 300px 0 40px 0;
+padding: 0 20px;
+}
+
+.btn-start {
+padding: 15px 60px;
+font-size: 1.6em;
+background-color: #ff4500;
+color: white;
+border: none;
+border-radius: 50px;
+cursor: pointer;
+font-weight: bold;
+box-shadow: 0 5px 15px rgba(255, 69, 0, 0.5);
+}
+
+.question {
+font-size: 1.2em;
+font-weight: bold;
+color: #0056b3;
+margin-bottom: 20px;
+}
+
+.option {
+display: block;
+width: 100/100;
+padding: 12px;
+margin: 10px 0;
+background-color: #fff;
+border: 1px solid #cce5ff;
+border-radius: 8px;
+cursor: pointer;
+text-align: left;
+font-size: 1em;
+}
+
+.result-character {
+font-size: 1.4em;
+color: #ffeb3b;
+background-color: rgba(0,0,0,0.5);
+border: 2px dashed #fff;
+padding: 10px;
+margin: 15px 0;
+font-weight: bold;
+display: inline-block;
+}
+</style>
+
+</head>
+<body>
+
+<div id="main-container" class="bg-cover">
+
+<div id="cover-section">
+<h1>測驗你是海賊王的哪個人物</h1>
+<button class="btn-start" onclick="startQuiz()">Start</button>
+</div>
+
+<div id="quiz-section" class="content-box">
+<div id="progress" style="color: #666; margin-bottom: 10px;">進度: 1 / 3</div>
+<div id="question-text" class="question"></div>
+<div id="options-container"></div>
+</div>
+
+<div id="result-section" class="content-box">
+
+<p style="text-align: left;font-weight: 900;">分析結果：根據你的抉擇，系統偵測到你擁有一種極其罕見的溫暖基因。你在海賊王中對應的是：</p>
+<div class="result-character">騙人布海賊團 首席贊助商金主爸爸</div>
+<p style="text-align: left; line-height: 1.6;font-weight: 900;">4月1日建議行動：給我錢!給我錢!快點給我錢!</p>
+
+<button onclick="location.reload()" style="padding: 10px 20px; cursor: pointer; border-radius: 5px; border: none; background-color: rgba(255, 255, 255, 0.4) !important;">再玩一次</button>
+</div>
+
+</div>
+
+<script>
+const questions = [
+{ q: "如果你手機記憶容量已滿，你會？", options: ["A. 開始刪除小學背過的九九乘法表。", "B. 付費升級成雲端腦，上傳到外太空。", "C. 瘋狂搖晃腦袋，試圖把記憶體搖勻。"] },
+{ q: "如果你看見西裝企鵝向你問路，你覺得他要去哪？", options: ["A. 去參加北極熊的婚禮。", "B. 去附近的超商買冰棒。", "C. 去面試全球最強特務。"] },
+{ q: "如果你發現鏡子的你比你早 0.5 秒動作，你會？", options: ["A. 立刻跟它玩剪刀石頭布，贏自己一次。", "B. 迅速塞一顆貢丸進鏡面，噎到它。", "C. 撥開它的手，讓它失去重心撞鏡子。"] }
+];
+
+let idx = 0;
+const container = document.getElementById('main-container');
+
+function startQuiz() {
+document.getElementById('cover-section').style.display = 'none';
+document.getElementById('quiz-section').style.display = 'block';
+container.className = 'bg-quiz';
+loadQuestion();
+}
+
+function loadQuestion() {
+document.getElementById('progress').innerText = "進度: " + (idx + 1) + " / 3";
+document.getElementById('question-text').innerText = questions[idx].q;
+const optBox = document.getElementById('options-container');
+optBox.innerHTML = '';
+questions[idx].options.forEach(o => {
+const btn = document.createElement('button');
+btn.className = 'option';
+btn.innerText = o;
+btn.onclick = () => {
+idx++;
+if(idx < 3) loadQuestion();
+else showResult();
+};
+optBox.appendChild(btn);
+});
+}
+
+function showResult() {
+document.getElementById('quiz-section').style.display = 'none';
+document.getElementById('result-section').style.display = 'block';
+container.className = 'bg-result';
+}
+</script>
+
+</body>
+</html>
